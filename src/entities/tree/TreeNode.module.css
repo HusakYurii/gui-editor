@@ -1,0 +1,19 @@
+.togglerIcon {
+    position: absolute;
+    top: 50%;
+    left: -20px;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+.connectLine::before {
+    display: block;
+    content: '';
+    border-left: solid 2px gray;
+    border-bottom: solid 2px gray;
+    width: 20px;
+    height: 32px;
+    position: absolute;
+    top: -17px;
+    left: -25px;
+    z-index: 1;
+}

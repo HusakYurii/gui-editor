@@ -1,5 +1,5 @@
 import { Provider } from "react-redux";
-import { store } from "../../entities/store";
+import { store } from "../../features/store";
 import { TreePanel } from "../../widgets/tree";
 import { PropertiesPanel } from "../../widgets/properties";
 import { CanvasPanel } from "../../widgets/canvas";

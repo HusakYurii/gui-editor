@@ -1,1 +1,1 @@
-export { CanvasPanel } from './CanvasPanel'
+export { CanvasPanel } from "./CanvasPanel";
