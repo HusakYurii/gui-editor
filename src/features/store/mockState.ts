@@ -1,4 +1,9 @@
-import { TSharedStore, EComponentTypes } from "../../types/entities/store";
+import { TSharedStore } from "../../types/entities/store";
+import { ENTITY_TYPES, COMPONENT_TYPES } from "../../types/entities/store/entity";
+import { getContainerData } from "./container";
+import { getEntityData } from "./entity";
+import { getTextData } from "./text";
+import { getNodeData } from "./tree";
 
 /**
  * Must be used by store only!
@@ -6,77 +11,43 @@ import { TSharedStore, EComponentTypes } from "../../types/entities/store";
  */
 export const mockState: TSharedStore = {
     assets: {},
-    tree: {
-        id: "234123",
-        entityId: "1",
-        parentId: null,
-        isRootNode: true,
-        children: [
-            {
-                id: "230413",
-                entityId: "2",
-                parentId: "234123",
-                children: [],
-            },
-            {
-                id: "200413",
-                entityId: "3",
-                parentId: "234123",
-                children: [
-                    {
-                        id: "200419",
-                        entityId: "4",
-                        parentId: "200413",
-                        children: [],
-                    }
-                ],
-            }
-        ],
-    },
+    tree: getNodeData("root", "1", null, true, [
+        getNodeData("230413", "2", "root"),
+        getNodeData("200413", "3", "root", false, [
+            getNodeData("200419", "4", "200413")
+        ]),
+    ]),
     entities: {
-        "1": {
-            name: "Scene",
-            tags: [],
-            components: [
-                EComponentTypes.CONTAINER
-            ]
-        },
-        "2": {
-            name: "Header",
-            tags: [],
-            components: [
-                EComponentTypes.CONTAINER
-            ]
-        },
-        "3": {
-            name: "Footer",
-            tags: [],
-            components: [
-                EComponentTypes.CONTAINER
-            ]
-        },
-        "4": {
-            name: "Footer Text",
-            tags: [],
-            components: [
-                EComponentTypes.CONTAINER
-            ]
-        }
+        "1": getEntityData("Scene", ENTITY_TYPES.CONTAINER, [COMPONENT_TYPES.CONTAINER]),
+        "2": getEntityData("Header", ENTITY_TYPES.CONTAINER, [COMPONENT_TYPES.CONTAINER]),
+        "3": getEntityData("Footer", ENTITY_TYPES.CONTAINER, [COMPONENT_TYPES.CONTAINER]),
+        "4": getEntityData("Footer Text", ENTITY_TYPES.TEXT, [COMPONENT_TYPES.CONTAINER, COMPONENT_TYPES.TEXT])
     },
     components: {
         container: {
-            "1": {
+            "1": getContainerData(),
+            "2": {
                 positionX: 0,
-                positionY: 0,
+                positionY: -100,
                 scaleX: 1,
                 scaleY: 1,
                 rotation: 0,
                 alpha: 1
-            }
+            },
+            "3": {
+                positionX: 0,
+                positionY: 200,
+                scaleX: 1,
+                scaleY: 1,
+                rotation: 0,
+                alpha: 1
+            },
         },
         sprite: {},
         nineSliceSprite: {},
-        text: {},
+        text: {
+            "4": getTextData()
+        },
         graphics: {},
         mask: {},
     }

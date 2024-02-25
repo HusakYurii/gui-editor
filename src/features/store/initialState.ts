@@ -1,4 +1,8 @@
-import { EComponentTypes, TSharedStore } from "../../types/entities/store";
+import { TSharedStore } from "../../types/entities/store";
+import { COMPONENT_TYPES, ENTITY_TYPES } from "../../types/entities/store/entity";
+import { getContainerData } from "./container";
+import { getEntityData } from "./entity";
+import { getNodeData } from "./tree";
 
 /**
  * Must be used by store only!
@@ -6,31 +10,13 @@ import { EComponentTypes, TSharedStore } from "../../types/entities/store";
  */
 export const initialState: TSharedStore = {
     assets: {},
-    tree: {
-        id: "234123",
-        entityId: "1",
-        parentId: null,
-        children: [],
-    },
+    tree: getNodeData("root", "0", null, true),
     entities: {
-        "1": {
-            name: "Scene",
-            tags: [],
-            components: [
-                EComponentTypes.CONTAINER
-            ]
-        }
+        "0": getEntityData("Scene", ENTITY_TYPES.CONTAINER, [COMPONENT_TYPES.CONTAINER])
     },
     components: {
         container: {
-            "1": {
-                positionX: 0,
-                positionY: 0,
-                scaleX: 1,
-                scaleY: 1,
-                rotation: 0,
-                alpha: 1
-            }
+            "0": getContainerData()
         },
         sprite: {},
         nineSliceSprite: {},

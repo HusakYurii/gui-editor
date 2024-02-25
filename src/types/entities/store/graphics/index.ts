@@ -1,7 +1,16 @@
+export const GRAPHICS_TYPES = Object.freeze({
+    RECTANGLE: "rectangle",
+    ROUNDED_RECTANGLE: "rounded_rectangle",
+    CIRCLE: "circle"
+});
+
+export type TGraphicsTypes = typeof GRAPHICS_TYPES[keyof typeof GRAPHICS_TYPES]
+
 export type TBaseGraphicsData = {
     x: number;
     y: number;
-    color: number;
+    color: string;
+    alpha: number;
 }
 
 export type TRectangleData = TBaseGraphicsData & {

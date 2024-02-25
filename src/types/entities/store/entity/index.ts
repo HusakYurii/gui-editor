@@ -1,26 +1,31 @@
+
+export const ENTITY_TYPES = Object.freeze({
+    CONTAINER: "container",
+    SPRITE: "sprite",
+    NINE_SLICE_SPRITE: "nineSliceSprite",
+    TEXT: "text",
+    GRAPHICS: "graphics",
+});
+
 /* 
     Basically those are the components which can be attached to an entity.
+    Some components overlap with the entity types because they are essentially about the same things
 */
-export enum EComponentTypes {
-    /* @TODO
-    The container is essential for all of the component types because it 
-    has all basic values any component type must have. Think if it has to be renamed to based
-    and moved to the entity itself ?
-    On the other hand, I want the entity to work more as an object with all meta values.
-    It is more like a composition of metadata
-    */
-    CONTAINER = "container",
-    SPRITE = "sprite",
-    NINE_SLICE_SPRITE = "nineSliceSprite",
-    TEXT = "text",
-    GRAPHICS = "graphics",
-    MASK = "mask"
-}
+export const COMPONENT_TYPES = Object.freeze({
+    ...ENTITY_TYPES,
+    MASK: "mask",
+    // more things like collision box, filters etc
+});
+
+
+export type TEntityType = typeof ENTITY_TYPES[keyof typeof ENTITY_TYPES];
+export type TComponentTypes = typeof COMPONENT_TYPES[keyof typeof COMPONENT_TYPES];
 
 export type TEntityData = {
     name: string;
     tags: string[];
-    components: EComponentTypes[]
+    type: TEntityType;
+    components: TComponentTypes[]
 };
 
 export type TEntitiesDataMap = Record<string, TEntityData>;

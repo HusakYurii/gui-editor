@@ -2,13 +2,10 @@ import { useState } from "react";
 import type { FC } from "react";
 import type { TNodeData } from "../../types/entities/store/tree";
 import { useAppStoreSelector } from "../../features/store";
-import { PlusIcon, MinusIcon } from "../../shared/icons";
+import { PlusIcon, MinusIcon } from "../../shared/icons/tree";
+import { TREE_NODE_DATA_ATTRIBUTES } from "./constants";
+import { ENTITY_ICONS_MAP } from "./entityIconsMap";
 import TreeNodeStyles from "./TreeNode.module.css";
-
-const TREE_NODE_DATA_ATTRIBUTES = {
-  ID: "data-tree-node-id",
-  NAME: "data-tree-node-name",
-};
 
 const createChildrenNodes = (children: TNodeData[]) => {
   return children.map((child) => <TreeNode key={child.id} nodeData={child} />);
@@ -17,7 +14,7 @@ const createChildrenNodes = (children: TNodeData[]) => {
 export const TreeNode: FC<{ nodeData: TNodeData }> = ({ nodeData }) => {
   const [isExpanded, setIsExpanded] = useState(true);
 
-  const { name } = useAppStoreSelector(
+  const entity = useAppStoreSelector(
     (state) => state.entities[nodeData.entityId]
   );
 
@@ -30,7 +27,10 @@ export const TreeNode: FC<{ nodeData: TNodeData }> = ({ nodeData }) => {
       className="select-none text-base pl-3 mt-1"
       {...{ [TREE_NODE_DATA_ATTRIBUTES.ID]: nodeData.id }}
     >
-      <div className="relative" {...{ [TREE_NODE_DATA_ATTRIBUTES.NAME]: name }}>
+      <div
+        className="relative"
+        {...{ [TREE_NODE_DATA_ATTRIBUTES.NAME]: entity.name }}
+      >
         {hasChildren && (
           <div
             className={`bg-gray-500 ${TreeNodeStyles.togglerIcon}`}
@@ -40,13 +40,16 @@ export const TreeNode: FC<{ nodeData: TNodeData }> = ({ nodeData }) => {
           </div>
         )}
 
-        <p
-          className={`border-2 border-transparent ${
+        <div
+          className={`flex items-center ${
             nodeData.isRootNode ? "" : TreeNodeStyles.connectLine
           }`}
         >
-          {name}
-        </p>
+          {ENTITY_ICONS_MAP[entity.type]()}
+          <span className="w-full border-2 border-transparent hover:bg-gray-500">
+            {entity.name}
+          </span>
+        </div>
       </div>
       {isExpanded && hasChildren && createChildrenNodes(nodeData.children)}
     </div>
