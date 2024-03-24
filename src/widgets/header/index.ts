@@ -1,1 +1,1 @@
-export { HeaderPanel } from "./HeaderPanel";
+export { HeaderWidget } from "./HeaderWidget";

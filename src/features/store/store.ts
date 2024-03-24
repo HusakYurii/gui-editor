@@ -42,7 +42,10 @@ export const mainStoreDataSlice = createSlice({
             const containerData = getContainerData();
             state.components.container[entityId] = containerData;
 
-            if (payload.entityType === ENTITY_TYPES.SPRITE) {
+            if (payload.entityType === ENTITY_TYPES.CONTAINER) {
+                // already did by default above
+            }
+            else if (payload.entityType === ENTITY_TYPES.SPRITE) {
                 state.components[COMPONENT_TYPES.SPRITE][entityId] = getSpriteData();
                 entity.components.push(COMPONENT_TYPES.SPRITE);
             }

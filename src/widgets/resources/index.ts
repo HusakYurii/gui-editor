@@ -1,1 +1,1 @@
-export { ResourcesPanel } from "./ResourcesPanel";
+export { ResourcesWidget } from "./ResourcesWidget";

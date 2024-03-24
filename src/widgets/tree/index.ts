@@ -1,1 +1,1 @@
-export { TreePanel } from "./TreePanel";
+export { TreeWidget } from "./TreeWidget";
