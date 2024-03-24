@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { FC } from "react";
-import type { TNodeData } from "../../../types/entities/store/tree";
-import { useAppStoreSelector } from "../../../features/store";
+import type { TNodeData } from "../../../../types/entities/store/tree";
+import { useAppStoreSelector } from "../../../../features/store";
 import {
   ContainerIcon,
   GraphicsIcon,
@@ -14,7 +14,7 @@ import {
 import {
   TEntityType,
   ENTITY_TYPES,
-} from "../../../types/entities/store/entity";
+} from "../../../../types/entities/store/entity";
 import { TREE_NODE_DATA_ATTRIBUTES } from "./constants";
 import TreeNodeStyles from "./TreeNode.module.css";
 

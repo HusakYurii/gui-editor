@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { useAppStoreSelector } from "../../features/store";
-import { TreeNodeEntity } from "./node/TreeNodeEntity";
+import { useAppStoreSelector } from "../../../features/store";
+import { TreeNodeEntity } from "./treeNode/TreeNodeEntity";
 
 export const TreeEntity: FC = () => {
   const tree = useAppStoreSelector((state) => state.tree);
